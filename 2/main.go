@@ -11,6 +11,52 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func addTwoNumbersSelf(l1 *ListNode, l2 *ListNode) *ListNode {
+	//记录一个头结点 ，为了方便最后返回除虚拟节点外的其他值
+	head := &ListNode{
+		Val:  -1,
+		Next: nil,
+	}
+	//创建一个链接用来存放结果
+	result := head
+	//保存当前进位
+	carryBit := 0
+	if l1 != nil || l2 != nil {
+		x, y := 0, 0
+		if l1 != nil {
+			x = l1.Val
+		}
+		if l2 != nil {
+			y = l2.Val
+		}
+		sum := x + y + carryBit
+		carryBit = sum / 10
+		currentNodeValue := sum % 10
+		currentNode := &ListNode{
+			Val:  currentNodeValue,
+			Next: nil,
+		}
+		result.Next = currentNode
+		//要将指针指到下一个节点
+		result = result.Next
+		if l1.Next != nil {
+			l1 = l1.Next
+		}
+		if l2.Next != nil {
+			l2 = l2.Next
+		}
+	}
+	// 只有最后一位才需要判断是否需要单独存储进位产生的1
+	if carryBit == 1 {
+		tailNode := &ListNode{
+			Val:  carryBit,
+			Next: nil,
+		}
+		result.Next = tailNode
+	}
+	return head.Next
+}
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	// 构建一个链表用来存放 l1 和 l2 两个链表相加的结果
 	// 其中 dummy 这个节点为虚拟头结点
