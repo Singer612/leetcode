@@ -97,6 +97,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		// l1 链表中还有节点未遍历完毕就继续遍历下去
 		if l1 != nil {
 			l1 = l1.Next
+
 		}
 		// l2 链表中还有节点未遍历完毕就继续遍历下去
 		if l2 != nil {
