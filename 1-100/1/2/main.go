@@ -3,9 +3,8 @@ package main
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int)
 	for i := 0; i < len(nums); i++ {
-		if _, ok := m[nums[i]]; ok {
-			res := []int{i, m[nums[i]]}
-			return res
+		if v, ok := m[nums[i]]; ok {
+			return []int{v, i}
 		}
 		m[target-nums[i]] = i
 	}
