@@ -1,16 +1,16 @@
 package main
 
 func canConstruct(ransomNote string, magazine string) bool {
-	if len(ransomNote) > len(magazine) {
-		return false
-	}
-	m := make(map[int32]int)
+	record := make([]int, 26)
+	// 通过record数据记录 magazine里各个字符出现次数
 	for _, v := range magazine {
-		m[v]++
+		record[v-'a']++
 	}
+	// 遍历ransomNote，在record里对应的字符个数做--操作
 	for _, v := range ransomNote {
-		m[v]--
-		if m[v] < 0 {
+		record[v-'a']--
+		// 如果小于零说明ransomNote里出现的字符，magazine没有
+		if record[v-'a'] < 0 {
 			return false
 		}
 	}
