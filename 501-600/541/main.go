@@ -1,20 +1,22 @@
 package main
 
+import "fmt"
+
 func reverseStr(s string, k int) string {
 	tmp := []byte(s)
 	for i := 0; i < len(tmp); i += 2 * k {
 		left, right := i, min(i+k-1, len(s)-1)
-		tmp = reverseString(tmp, left, right)
+		reverseString(tmp, left, right)
 	}
 	return string(tmp)
 }
-func reverseString(s []byte, left, right int) []byte {
+func reverseString(s []byte, left, right int) {
 	for left < right {
 		s[left], s[right] = s[right], s[left]
 		left++
 		right--
 	}
-	return s
+	return
 }
 func min(x, y int) int {
 	if x > y {
@@ -25,5 +27,5 @@ func min(x, y int) int {
 
 func main() {
 	s := "abcdefg"
-	reverseStr(s, 2)
+	fmt.Println(reverseStr(s, 2))
 }
