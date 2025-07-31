@@ -31,7 +31,8 @@ func (q *Queue) IsEmpty() bool {
 	return q.size == 0
 }
 
-func maxDepth(root *TreeNode) int {
+// 遍历
+func maxDepth1(root *TreeNode) int {
 	depth := 0
 	res := make([][]int, 0)
 	if root == nil {
@@ -59,6 +60,19 @@ func maxDepth(root *TreeNode) int {
 	return depth
 }
 
+// 递归
+func maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
+}
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
 func main() {
 
 }
