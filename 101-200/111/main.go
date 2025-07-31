@@ -31,7 +31,7 @@ func (q *Queue) IsEmpty() bool {
 	return q.size == 0
 }
 
-func minDepth(root *TreeNode) int {
+func minDepth1(root *TreeNode) int {
 	res := make([][]int, 0)
 	depth := 0
 	if root == nil {
@@ -60,6 +60,27 @@ func minDepth(root *TreeNode) int {
 		res = append(res, tmp)
 	}
 	return depth
+}
+
+// 后序遍历
+func minDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return min(minDepth(root.Left), minDepth(root.Right)) + 1
+}
+
+func min(x, y int) int {
+	if x > 0 && y > 0 {
+		if x < y {
+			return x
+		}
+		return y
+	} else if x == 0 {
+		return y
+	} else {
+		return x
+	}
 }
 
 func main() {
