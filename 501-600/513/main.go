@@ -36,7 +36,7 @@ func (q *Queue) IsEmpty() bool {
 	return len(q.queue) == 0
 }
 
-func findBottomLeftValue(root *TreeNode) int {
+func findBottomLeftValue1(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -60,6 +60,45 @@ func findBottomLeftValue(root *TreeNode) int {
 	}
 	return res
 }
-func main() {
+func findBottomLeftValue(root *TreeNode) int {
+	maxDepth, res := 0, 0
+	var getHeight func(node *TreeNode, depth int)
+	getHeight = func(node *TreeNode, depth int) {
+		if node.Left == nil && node.Right == nil {
+			if depth > maxDepth {
+				maxDepth = depth
+				res = node.Val
+			}
+			return
+		}
+		// 从上往下算高度
+		if node.Left != nil {
+			getHeight(node.Left, depth+1)
+		}
+		if node.Right != nil {
+			getHeight(node.Right, depth+1)
+		}
+	}
+	getHeight(root, 1)
+	return res
+}
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+func buildTree() *TreeNode {
+	// 创建节点
+	root := &TreeNode{Val: 3}
+	root.Left = &TreeNode{Val: 9}
+	root.Right = &TreeNode{Val: 20}
+	root.Right.Left = &TreeNode{Val: 15}
+	root.Right.Right = &TreeNode{Val: 7}
+	return root
+}
 
+func main() {
+	tree := buildTree()
+	findBottomLeftValue(tree)
 }
