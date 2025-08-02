@@ -60,6 +60,8 @@ func findBottomLeftValue1(root *TreeNode) int {
 	}
 	return res
 }
+
+// 不需要添加标志位，因为如果到右面了，那一定是左面没有需要的值
 func findBottomLeftValue(root *TreeNode) int {
 	maxDepth, res := 0, 0
 	var getHeight func(node *TreeNode, depth int)
