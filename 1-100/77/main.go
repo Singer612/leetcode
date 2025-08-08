@@ -10,7 +10,7 @@ func combine(n int, k int) [][]int {
 			res = append(res, tmp)
 			return
 		}
-		for i := start; i <= n; i++ {
+		for i := start; i <= n-(k-len(path))+1; i++ {
 			path = append(path, i)
 			dfs(n, k, i+1)
 			path = path[:len(path)-1]
